@@ -1,9 +1,10 @@
 # SPDX-FileCopyrightText: 2016-2018 CERN.
+# SPDX-FileCopyrightText: 2026 TU Wien.
 # SPDX-License-Identifier: MIT
 
 """Date string field."""
 
-import arrow
+import pendulum
 from arrow.parser import ParserError
 from marshmallow import fields, missing
 
@@ -14,8 +15,9 @@ class DateString(fields.Date):
     def _serialize(self, value, attr, obj, **kwargs):
         """Serialize an ISO8601-formatted date."""
         try:
-            return super()._serialize(arrow.get(value).date(), attr, obj, **kwargs)
-        except ParserError:
+            return super()._serialize(pendulum.parse(value).date(), attr, obj, **kwargs)
+        except (ParserError, TypeError, ValueError):
+            # pendulum.parse() can raise a ValueError (e.g. on ""), or a TypeError (e.g. on None)
             return missing
 
     def _deserialize(self, value, attr, data, **kwargs):
