@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2015-2023 CERN.
 # SPDX-FileCopyrightText: 2024-2026 Graz University of Technology.
 # SPDX-FileCopyrightText: 2025 KTH Royal Institute of Technology.
+# SPDX-FileCopyrightText: 2026 TU Wien.
 # SPDX-License-Identifier: MIT
 
 """REST API for Records.
@@ -708,6 +709,6 @@ by Invenio-PIDStore.
 from .ext import InvenioRecordsREST
 from .proxies import current_records_rest
 
-__version__ = "6.0.0"
+__version__ = "6.0.1"
 
 __all__ = ("__version__", "current_records_rest", "InvenioRecordsREST")
